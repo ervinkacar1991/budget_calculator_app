@@ -4,7 +4,6 @@ import ExpenseForm from "./components/ExpenseForm";
 import ExpenseList from "./components/ExpenseList";
 import Alert from "./components/Alert";
 import { v4 as uuidv4 } from "uuid";
-import { clear } from "@testing-library/user-event/dist/clear";
 
 const initialExpenses = [
   { id: uuidv4(), charge: "rent", amount: 1600 },
@@ -59,11 +58,15 @@ function App() {
   };
   // clear all items
   const clearItems = () => {
-    console.log("Cleared all items");
+    setExpenses([]);
+    handleAlert({ type: "danger", text: "all items deleted" });
   };
   // handle delete single item
   const handleDelete = (id) => {
-    console.log(`item deleted : ${id}`);
+    const filteredItem = expenses.filter((item) => item.id !== id);
+    console.log(filteredItem);
+    setExpenses(filteredItem);
+    handleAlert({ type: "danger", text: "item deleted" });
   };
   //handle edit
   const handleEdit = (id) => {
