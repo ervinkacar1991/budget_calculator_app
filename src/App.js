@@ -4,6 +4,7 @@ import ExpenseForm from "./components/ExpenseForm";
 import ExpenseList from "./components/ExpenseList";
 import Alert from "./components/Alert";
 import { v4 as uuidv4 } from "uuid";
+import { clear } from "@testing-library/user-event/dist/clear";
 
 const initialExpenses = [
   { id: uuidv4(), charge: "rent", amount: 1600 },
@@ -50,8 +51,23 @@ function App() {
       setCharge("");
       setAmount("");
     } else {
-      handleAlert({ type: "danger", text: "nista od ovoga" });
+      handleAlert({
+        type: "danger",
+        text: `charge can't be empty value and amount value has to be bigger than zero`,
+      });
     }
+  };
+  // clear all items
+  const clearItems = () => {
+    console.log("Cleared all items");
+  };
+  // handle delete single item
+  const handleDelete = (id) => {
+    console.log(`item deleted : ${id}`);
+  };
+  //handle edit
+  const handleEdit = (id) => {
+    console.log(`item edited : ${id}`);
   };
 
   return (
@@ -66,7 +82,12 @@ function App() {
           handleCharge={handleCharge}
           handleSubmit={handleSubmit}
         />
-        <ExpenseList expenses={expenses} />
+        <ExpenseList
+          expenses={expenses}
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
+          clearItems={clearItems}
+        />
       </main>
       <h1>
         total spending :{" "}
