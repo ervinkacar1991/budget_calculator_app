@@ -20,7 +20,10 @@ function App() {
   const [charge, setCharge] = useState("");
   // single amount
   const [amount, setAmount] = useState("");
-
+  //edit
+  const [edit, setEdit] = useState(false);
+  //id, edit item
+  const [id, setId] = useState(0);
   //alert
   const [alert, setAlert] = useState({ show: false });
   //*********functionality *********
@@ -68,9 +71,14 @@ function App() {
     setExpenses(filteredItem);
     handleAlert({ type: "danger", text: "item deleted" });
   };
-  //handle edit
+  //handle edit, the most complicated in this app
   const handleEdit = (id) => {
-    console.log(`item edited : ${id}`);
+    let expense = expenses.find((item) => item.id === id);
+    let { charge, amount } = expense;
+    setCharge(charge);
+    setAmount(amount);
+    setEdit(true);
+    setId(id);
   };
 
   return (
@@ -84,6 +92,7 @@ function App() {
           handleAmount={handleAmount}
           handleCharge={handleCharge}
           handleSubmit={handleSubmit}
+          edit={edit}
         />
         <ExpenseList
           expenses={expenses}
