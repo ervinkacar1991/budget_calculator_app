@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import ExpenseItem from "./ExpenseItem";
 import { MdDelete } from "react-icons/md";
+import { AppContext } from "../context";
 
-const ExpenseList = ({ expenses, handleEdit, handleDelete, clearItems }) => {
+const ExpenseList = ({ handleEdit, handleDelete, clearItems }) => {
+  const { expenses } = useContext(AppContext);
   return (
     <>
       <ul className="list">

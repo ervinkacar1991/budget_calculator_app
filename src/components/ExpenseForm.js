@@ -1,14 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { MdSend } from "react-icons/md";
+import { AppContext } from "../context";
 
-const ExpenseForm = ({
-  charge,
-  amount,
-  handleCharge,
-  handleAmount,
-  handleSubmit,
-  edit,
-}) => {
+const ExpenseForm = ({ handleCharge, handleAmount, handleSubmit }) => {
+  const { charge, amount, edit } = useContext(AppContext);
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-center">
